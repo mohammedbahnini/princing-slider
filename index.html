@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing component</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/app.css">
+
+</head>
+<body>
+    <main>
+        <div class="intro">
+            <h1 class="title">Simple, traffic-based pricing</h1>
+            <p>Sign-up for our 30-day trial.</p>
+            <p>No credit card required.</p>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="card-princing">
+
+                    <h2 class="viewers"><span>100K</span> Pageviews</h2>
+                    <div class="card__month-price">
+                        <h1 class="price">$ <span>160</span></h1>
+                        <p>/ per month</p>
+                    </div>
+                    <div class="card-slider">
+                        <input type="range" id="range" min="1" max="5" value="2">
+                    </div>
+
+                </div>
+               
+                <div class="card-billing">
+                    <div class="billing-type">
+
+                        <p class="monthly-billing">Monthly Billing</p>
+                        <div class="type-check">
+                            
+                            <input type="checkbox"  id="type" >
+                            <label for="type"></label>
+                        </div>
+                        <p class="yearly-billing">Yearly Billing</p>
+
+                        <div class="discount">
+                           <span class="desktop">25% discount</span>
+                           <span class="mobile">-25%</span>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="card-footer">
+                <ul>
+                    <li>
+                        <img src="images/icon-check.svg" alt=""> Unlimited websites
+                    </li>
+                    <li>
+                        <img src="images/icon-check.svg" alt=""> 100% data ownership
+                    </li>
+                    <li>
+                        <img src="images/icon-check.svg" alt=""> Email reports
+                    </li>
+                </ul>
+                <a href="#" class="btn">Start my trial</a>
+            </div>
+
+        </div>
+
+    </main>
+    
+    <script>
+        // const data to work with 
+        const data = [
+            {
+                pageviews : '10K' ,
+                price : 8
+            } , 
+            {
+                pageviews : '50K' ,
+                price : 12
+            } , 
+            {
+                pageviews : '100K' ,
+                price : 16
+            } , 
+            {
+                pageviews : '500K' ,
+                price : 24
+            } , 
+            {
+                pageviews : '1M' ,
+                price : 36
+            }
+        ];
+        const input = document.querySelector('input[type=range]');
+        const card = document.querySelector('.card');
+        
+
+        const hanndleInput = (e)=>{
+            // check if the user choose yearly sub
+            const yearly_checked = document.querySelector('input[type=checkbox]').checked;
+            const value  = input.value ;
+            const min = input.min ; 
+            const max = input.max;
+
+            // updating range style
+            input.style.backgroundSize = `${ 100 / (max - min) * (value - min ) }% 100%`;
+            
+            // get the specific item through index
+            const plan = data.filter( (item , index)=>{
+                return index == value - 1 ;
+            })[0];
+
+            // updating displayed data
+            card.querySelector('.viewers span').innerText = plan.pageviews;
+            card.querySelector('.price span').innerText = yearly_checked ? (plan.price * 0.75).toFixed(2) : plan.price.toFixed(2);
+            
+        };
+        hanndleInput();
+        document.querySelector('input[type=checkbox]').addEventListener('change' , hanndleInput);
+        input.addEventListener( 'input' , hanndleInput);
+    </script>
+</body>
+</html>

@@ -1,0 +1,294 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+* , *::after , *::before{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    font-family: 'Manrope', sans-serif;
+    height: 100vh;
+    background: url('../images/bg-pattern.svg') no-repeat center top / 100% 50%;
+    color : $text-color;
+    @include mobile {
+        height: auto;
+    }
+}
+.output{
+    margin-top: 3rem;
+}
+main{
+    @include mobile{
+        width: 90%;
+        margin: 0 auto;
+    }
+    .intro{
+        text-align: center;
+        padding: 7rem;
+        background: url('../images/pattern-circles.svg') no-repeat center ;
+        @include mobile{
+            padding: 0;
+            padding: 6.25rem 0;
+        }
+        .title{
+            font-size: 2rem;
+            margin-bottom: .5rem;
+            color : $cta-bg;
+            @include mobile{
+                font-size: 1.5rem;
+            }
+        }
+        p{
+            font-size: .9rem;
+            display: inline-block;
+            @include mobile{
+                display: block;
+            }
+        }
+    }
+    .card{
+        width: 33.75rem;
+        background-color: white ;
+        margin: 0 auto;
+        border-radius: .5rem;
+        box-shadow: rgba(0, 0, 0, .1) 3px 0 15px 0;
+        @include mobile{
+            width: 100%;
+            margin-bottom: 7rem;
+        }
+        .card-body{
+            padding: 3rem;
+            padding-bottom: 0;
+            border-bottom: 1px solid $empty-slidebar;
+            @include mobile{
+                padding: 2rem 2rem 0 2rem ;
+            }
+            .card-princing{
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                white-space: nowrap;
+                text-align: center;
+                @include mobile{
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                }
+                .viewers{
+                    font-size: 1rem;
+                    text-transform: uppercase;
+                    font-weight: 300;
+                    width: 50%;
+                    @include mobile{
+                        width: 100%;
+                        letter-spacing: .1rem;
+                    }
+                }
+                .card__month-price{
+                    display: flex;
+                    gap: .5rem;
+                    align-items: center;
+                    width: 50%;
+                    justify-content: end;
+                    @include mobile{
+                        justify-content: center;
+                        width: 100%;
+                    }
+                    @include mobile{
+                        order: 3;
+                    }
+                    .price{
+                        color : $cta-bg;
+                        font-size: 2.25rem;
+                    }
+                }
+                
+            }
+            .card-slider{
+                width: 100%;
+                height: $slider-thumb-height ;
+                display: flex;
+                align-items: center;
+                margin-top: 1rem;
+                @include mobile{
+                    margin: 1.5rem 0;
+                }
+                input[type=range]{
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    
+                    display: block;
+                    width: 100%;
+                    height: .5rem;
+                    background: $empty-slidebar;
+                    border-radius: 1rem;
+                    background-image: linear-gradient($soft-cyan, $soft-cyan);
+                    background-size: 70% 100%;
+                    background-repeat: no-repeat;
+                    &::-webkit-slider-thumb{
+                        -webkit-appearance: none;
+                        height: $slider-thumb-height ;
+                        aspect-ratio: 1 / 1;
+                        border-radius: 50%;
+                        background: $strong-cyan url('../images/icon-slider.svg') no-repeat center 50%;
+                        cursor: ew-resize;
+                        box-shadow: lighten($color: $soft-cyan, $amount: 10%) 0 .75rem 10px 0;
+                        transition: background .3s ease-in-out;
+                        border: none;
+                        cursor: pointer;
+    
+                    }
+                    &::-moz-range-thumb{
+                        -moz-appearance: none;
+                        height: $slider-thumb-height ;
+                        aspect-ratio: 1 / 1;
+                        border-radius: 50%;
+                        background: $strong-cyan url('../images/icon-slider.svg') no-repeat center 50%;
+                        cursor: ew-resize;
+                        box-shadow: lighten($color: $soft-cyan, $amount: 10%) 0 .75rem 10px 0;
+                        transition: background .3s ease-in-out;
+                        border: none;
+                        cursor: pointer;
+                    }
+                    &::-ms-thumb{
+                        appearance: none;
+                        height: $slider-thumb-height ;
+                        aspect-ratio: 1 / 1;
+                        border-radius: 50%;
+                        background: $strong-cyan url('../images/icon-slider.svg') no-repeat center 50%;
+                        cursor: ew-resize;
+                        box-shadow: lighten($color: $soft-cyan, $amount: 10%) 0 .75rem 10px 0;
+                        transition: background .3s ease-in-out;
+                        border: none;
+                        cursor: pointer;
+                    }
+                    
+                }
+            }
+            .card-billing{
+                padding:2rem 0;
+                .billing-type{
+                    position: relative;
+                    display: flex;
+                    justify-content: center;
+                    gap: 1rem;
+                    width: fit-content;
+                    margin: 0 auto;
+                    @include mobile{
+                        gap: .5rem;
+                    }
+                    .type-check{
+                        input[type=checkbox]{
+                            display : none;
+                            position: relative;
+    
+                            + label{
+                                display: block;
+                                width: $toggle-width;
+                                height: $toogle-height;
+                                border-radius: 5rem;
+                                background-color: $toggle-bg;
+                                position: relative;
+                                cursor: pointer;
+                                transition: .3s;
+                                &:hover{
+                                    background-color: $soft-cyan;
+                                }
+                                &::after{
+                                    content : '';
+                                    height: $toggle-indicator-height;
+                                    aspect-ratio: 1;
+                                    border-radius: 50%;
+                                    background-color: white;
+                                    position: absolute;
+                                    top: 50%;
+                                    left: 10%;
+                                    transform: translateY(-50%);
+                                    transition: .3s;
+                                }
+                            }
+                            &:checked{
+                                +label::after{
+                                    left: calc(100% - 10% - #{$toggle-indicator-height});
+                                }
+                            }
+                            
+                        }
+                    }
+                    p{
+                        font-size: .8rem;
+                    }
+                    .discount{
+                        position: absolute;
+                        left: calc(100% + .5rem);
+                        background-color: lighten($color: $light-red, $amount: 27%);
+                        border-radius: 2rem;
+                        padding: .2rem .5rem;
+                        font-size: .7rem;
+                        color : $light-red;
+                        white-space: nowrap;
+                        .mobile{
+                            display: none;
+                            @include mobile{
+                                display: block;
+                            }
+                        }
+                        .desktop{
+                            @include mobile{
+                                display: none;
+                            }
+                        }
+                        
+                    }
+                }
+            }
+        }
+        .card-footer{
+            padding: 2.25rem 3rem ;
+            display: flex;
+            justify-content : space-between;
+            align-items: center;
+            @include mobile{
+                flex-direction: column;
+                justify-content: center;
+                gap: 2.5rem;
+            }
+            ul{
+                list-style: none;
+                li{
+                    text-align: left;
+                    @include mobile{
+                        width: 100%;
+                        text-align: center;
+                    }
+                    &:not(:last-child){
+                        margin-bottom: 1rem;
+                    }
+                    img{
+                        margin-right: 1rem;
+                    }
+                }
+                
+            }
+            .btn{
+                text-decoration: none;
+                color : $pale-blue;
+                background-color: $cta-bg;
+                padding: .75rem 2rem ;
+                border-radius: 10rem;
+                transition: .3s;
+                &:hover{
+                    color: $very-pale-blue;
+                }
+                @include mobile{
+                    padding: .75rem 3.5rem;
+                }
+            }
+        }
+        
+
+    }
+}
